@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 Защищённый доступ | PiratBit Mirror</title>
+    <style>
+        :root {
+            --primary: #0070f3;
+            --secondary: #7928ca;
+            --dark: #111;
+            --light: #fafafa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .description {
+            color: #888;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 112, 243, 0.3);
+        }
+        
+        .security-badge {
+            display: inline-block;
+            background: rgba(0, 112, 243, 0.1);
+            border: 1px solid rgba(0, 112, 243, 0.3);
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin: 5px;
+            font-size: 14px;
+        }
+        
+        .timer {
+            margin: 25px 0;
+            color: #888;
+        }
+        
+        #countdown {
+            color: #0070f3;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">🔐</div>
+            <h1>Защищённый доступ к ресурсу</h1>
+            
+            <p class="description">
+                Нажмите кнопку ниже для безопасного перехода на зеркало PiratBit.
+                Ссылка защищена от автоматического сбора ботами.
+            </p>
+            
+            <div style="margin: 25px 0;">
+                <span class="security-badge">🛡️ Защита от ботов</span>
+                <span class="security-badge">⏱️ 1 час действия</span>
+                <span class="security-badge">🔒 Одноразовая ссылка</span>
+            </div>
+            
+            <button class="btn" id="accessBtn">
+                ⚡ Перейти на сайт
+            </button>
+            
+            <div class="timer">
+                Автопереход через: <span id="countdown">10</span> сек
+            </div>
+            
+            <p style="margin-top: 20px; color: #666; font-size: 14px;">
+                Если кнопка не работает: 
+                <a href="https://mirror.piratbit.fun" style="color: #0070f3;">нажмите здесь</a>
+            </p>
+        </div>
+        
+        <div style="color: #555; font-size: 12px;">
+            <p>🌐 Размещено на Vercel | 🔒 Защищённый шлюз</p>
+        </div>
+    </div>
+
+    <script>
+        let countdown = 10;
+        const countdownEl = document.getElementById('countdown');
+        const btn = document.getElementById('accessBtn');
+        
+        // Таймер обратного отсчёта
+        const timer = setInterval(() => {
+            countdown--;
+            countdownEl.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                redirect();
+            }
+        }, 1000);
+        
+        // Функция редиректа
+        function redirect() {
+            btn.disabled = true;
+            btn.innerHTML = '🔄 Перенаправление...';
+            
+            // Задержка для проверки (боты обычно не ждут)
+            setTimeout(() => {
+                window.location.href = 'https://mirror.piratbit.fun';
+            }, 1000);
+        }
+        
+        // Клик по кнопке
+        btn.addEventListener('click', redirect);
+        
+        // Проверка на бота
+        const isBot = /bot|crawler|spider|scraper/i.test(navigator.userAgent);
+        if (isBot) {
+            document.body.innerHTML = '<h1 style="text-align:center;padding:50px;">Доступ запрещён для ботов</h1>';
+        }
+    </script>
+</body>
+</html>
